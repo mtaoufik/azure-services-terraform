@@ -3,9 +3,9 @@
 # -----------------------------
 
 # Input Variables
-$SourceOwner = "mtaoufik"           # Current owner of the repository (username or organization)
-$RepoName = "azure-services-powershell"            # Name of the repository to transfer
-$DestinationOwner = "taoufikmohamed"          # New owner's username or organization
+$SourceOwner = "current-owner"           # Current owner of the repository (username or organization)
+$RepoName = "repository-name"            # Name of the repository to transfer
+$DestinationOwner = "new-owner"          # New owner's username or organization
 
 # Get GitHub Token from Environment Variable
 $GitHubToken = $env:GITHUB_TOKEN
@@ -20,7 +20,7 @@ if (-not $GitHubToken) {
 $GitHubApiUrl = "https://api.github.com/repos/$SourceOwner/$RepoName/transfer"
 
 # Function to Initiate Repository Transfer
-function Transfer-Repository {
+function Move-Repository {
     Write-Host "Initiating transfer of repository '$RepoName' from '$SourceOwner' to '$DestinationOwner'..."
 
     # Prepare the JSON payload
@@ -48,11 +48,11 @@ function Transfer-Repository {
 }
 
 # Function to Check Transfer Status
-function Check-TransferStatus {
+function Get-TransferStatus {
     Write-Host "Checking transfer status for repository '$RepoName'..."
 
     # Make the API request to get repository details
-    $Response = Invoke-RestMethod -Uri "https://api.github.com/repos/$SourceOwner/$RepoName" `
+    $Response = Invoke-RestMethod -Uri "httpclears://api.github.com/repos/$SourceOwner/$RepoName" `
         -Method Get `
         -Headers @{
             "Authorization" = "token $GitHubToken"
@@ -68,3 +68,4 @@ function Check-TransferStatus {
 }
 
 # Main Script Execution
+
